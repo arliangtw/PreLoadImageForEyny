@@ -12,6 +12,8 @@
 // @include     http://*.eyny.com/*
 // @require     http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.1.min.js
 // ==/UserScript==
+GM_addStyle(".redBorder { border : 'solid 1px red' }");
+
 window.MaskPanel = 
 {
 	transDiv: null, //整個畫面，讓他暗
