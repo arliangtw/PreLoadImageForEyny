@@ -238,19 +238,28 @@ try {
   							},
   							success: function(htmlPage){
 										//MaskPanel.hide();
-										var outerHtmlObj = $.parseHTML(htmlPage); //outerHtmlObj是array
-										var postDiv = $(outerHtmlObj).find("#postlist >div:first");
-										var postMsgDiv = $(outerHtmlObj).find("#postmessage"+$(postDiv).attr("id").substr($(postDiv).attr("id").indexOf("_")));
+										var postDiv = $.parseHTML(htmlPage).find("#postlist >div:first");
+										var postMsgDiv = $(postDiv).find("#postmessage"+$(postDiv).attr("id").substr($(postDiv).attr("id").indexOf("_")));
 										var postImgs = $(postMsgDiv).find("img");
 										if (postImgs.length > 0) {
-											console.log($(postMsgDiv).attr("id"));
 											var cache = $("<div id='"+$(postMsgDiv).attr("id")+"' >").insertAfter(aObj);
+											console.log("begin");
 											$.each(postImgs,function(tt,imgObj){
-													console.log("append "+ $(imgObj).attr("src"));	
-													$(cache).append("<img src='"+$(imgObj).attr("src")+"' height='1' width='1' >");
+													if (typeof($(imgObj).attr("file"))!== "undefined"){
+															//你媽啦～有一些不守規矩的tag
+															$(cache).append("<img src='"+$(imgObj).attr("file")+"' height='1' width='1' >");
+															$(aObj).css('border','solid 1px red');															
+													}else{
+														if ($(imgObj)[0].naturalWidth >200 || $(imgObj)[0].naturalHeight > 200){
+																console.log("append "+ $(imgObj).attr("src") + " ,size= " + $(imgObj)[0].naturalWidth + "*" + $(imgObj)[0].naturalHeight);
+																$(cache).append("<img src='"+$(imgObj).attr("src")+"' height='1' width='1' >");
+																$(aObj).css('border','solid 1px red');
+														}
+													}
 											});
-											$(aObj).css('border','solid 1px red');
 										}
+										
+										
 								}
 						});
 	
