@@ -229,7 +229,7 @@ try {
 	  					if (typeof($(aObj).attr("href")) !== "undefined"){
 	  							var src = (document.URL.substr(0,document.URL.lastIndexOf("/")) + "/" + $(aObj).attr("href"));
 	  							//helloworld();
-	  							MaskPanel.msg("oh my god! ajax error",250,90,"MB_OK");
+	  							MaskPanel.msg("oh my god! ajax error("+$(aObj).text()+")",250,90,"MB_OK");
 	  							/*
 	  							MaskPanel.showWait();
 									$.ajax({
@@ -240,9 +240,11 @@ try {
 		    							cache: true, // 預設值為 true 
 		    							error: function(xhr){
 		    									MaskPanel.hide();
+		    									MaskPanel.msg("oh my god! ajax error("+$(aObj).text()+")",250,90,"MB_OK");
 		    							},
 		    							success: function(htmlPage){
 	  											alert(src);
+	  											MaskPanel.hide();
 	  									}
 									});*/
 							}
